@@ -3,10 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- CSS Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <title>@yield('title')</title>
 
@@ -17,7 +15,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="collapse navbar-collapse" id="navbar">
                     <a href="/" class="navbar-brand">
-                        <img src="/img/hdcevents_logo.svg" alt="Banco Treino">
+                        <img src="{{asset('storage/bancoLogo.png')}}" alt="Banco Treino" style="height: 40px;">
                     </a>
                     <ul class="navbar-nav">
                         @auth
@@ -26,6 +24,9 @@
                             </li>
                             <li class="nav-item">
                                 <a href="/accounts/create" class="nav-link">Cadastrar contas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/accounts/file" class="nav-link">Arquivos</a>
                             </li>
                             <li class="nav-item">
                                 <form action="/logout" method="POST">
@@ -68,7 +69,9 @@
             <p>Banco Treino</p>
         </footer>
 
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        
+        <script src="{{asset('js/ionicons.esm.js')}}"></script>
+        <script src="{{asset('js/ionicons.js')}}"></script>
+        
     </body>
 </html>

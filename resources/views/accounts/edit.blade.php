@@ -3,7 +3,7 @@
 @section('title', 'Movimentar dinheiro do ' . $account->name)
     
 @section('content')
-    <div class="bank-container">
+    <div class="container">
         <h1>O seu saldo atual do {{ $account->name }} é de R${{ number_format($account->fund, 2) }}</h1>
         <form action="/accounts/update/{{ $account->id }}" method="POST" enctype="multipart/form-data">
             @csrf

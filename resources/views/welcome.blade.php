@@ -4,9 +4,14 @@
     
 @section('content')
 
-    <div class="accounts-container">
+    <div class="container pb-5">
         @auth
-            <h1>Bem-vindo {{ $user->name }}, sinta-se a vontade para mexer nas suas contas.</h1>
+            {{-- <x-header username="{{ $user->name }}" /> --}}
+            @component('components.header', [
+                'username' => $user->name
+            ])
+            @endcomponent
+
             @foreach($accounts as $account)
                 @if ($account->user_id == $user->id)
                     <div class="card">  
@@ -21,7 +26,9 @@
         @endauth
         @guest
             <div class="card">
-                <h1>Bem-vindo ao nosso site</h1>
+                {{-- <x-header /> --}}
+                @component('components.header', [])
+                @endcomponent
                 <div class="card-body">
                     <div class="card-title">...</div>
                     <div class="card-date">Para ver suas contas neste site, é necessário fazer 

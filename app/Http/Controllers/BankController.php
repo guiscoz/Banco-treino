@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\Account;
 use App\Models\User;
@@ -31,8 +32,14 @@ class BankController extends Controller
         $user = auth()->user(); 
         $account->user_id = $user->id; 
 
-        $account->save(); 
-        return redirect('/')->with('msg', 'Conta criada com sucesso!');
+        $repeated = Account::where([['name', '=', $account->name]])->first();
+
+        if($repeated == null) {
+            $account->save(); 
+            return redirect()->route('index')->with('msg', 'Conta criada com sucesso!');  
+        } else {
+            return redirect()->route('create')->with('msg', 'Não é possível ter mais de uma conta no mesmo banco.');
+        } 
     }
 
     public function dashboard() {
@@ -58,13 +65,6 @@ class BankController extends Controller
         return redirect('/dashboard')->with('msg', 'Conta excluída com sucesso!');
     }
 
-    public function dump($data){
-        echo "<pre>";
-        var_dump($data);
-        echo "</pre>";
-        die;
-    }
-
     public function update(Request $request, $id) {
         //dd($request->all());
         $data = $request->all();
@@ -83,13 +83,59 @@ class BankController extends Controller
             $newFund = $currentFund->fund + $dataAmmount;
         }
 
-        $currentFund->fund = $newFund;
+        if($newFund >= 0){
+           $currentFund->fund = $newFund;
 
-        $newData = [
-            'fund' => $newFund,
-        ];
+            $newData = [
+                'fund' => $newFund,
+            ];
+            
+            Account::findOrFail($request->id)->update($newData);
+            return redirect('/dashboard')->with('msg', 'Saldo alterado com sucesso!');
+        } else {
+            return redirect()->route('edit', [$id])->with('msg', 'Não foi possível retirar essa quantidade de dinheiro da sua conta.');
+        }   
+    }
 
-        Account::findOrFail($request->id)->update($newData);
-        return redirect('/dashboard')->with('msg', 'Saldo alterado com sucesso!');
+    public function file() {
+        $user = auth()->user();
+        return view('accounts.file', ['user' => $user]);
+    }
+
+    public function upload(Request $request) {
+        $user = auth()->user();
+
+        $validade = $request ->validate(
+            //regras
+            [
+                'txt' => 'mimes:txt',
+                'image' => 'image|mimes:png'
+            ],
+            //mensagens de erros
+            [
+
+                'txt.mimes' => 'Formato errado!',
+                'image.image' => 'Precisa ser uma imagem',
+                'image.mimes' => 'Precisa ser um arquivo png',
+            ]
+        );
+
+        if($request->txt != null) {
+            $request->txt->storeAs('public/userFiles', 'userTxt'.$user->id.'.txt');
+        }
+        if($request->image != null){
+            $request->image->storeAs('public/userFiles', 'userImage'.$user->id.'.png');
+        }
+        
+        return redirect('/dashboard')->with('msg', 'Arquivo(s) enviado(s) com sucesso!');
+    }
+
+    public function download($file){
+        return response()->download('storage/userFiles/'.$file);
+    }
+
+    public function deleteFile($file){
+        unlink(public_path('storage/userFiles/'.$file));
+        return redirect('/dashboard')->with('msg', 'Arquivo removido com sucesso!');
     }
 }
