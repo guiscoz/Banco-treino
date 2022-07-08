@@ -15,12 +15,12 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('accounts')->insert([
-        //     'name' => 'Teste',
-        //     'number' => 654,
-        //     'fund' => 0,
-        //     'user_id' => 1,
-        // ]);
+        DB::table('accounts')->insert([
+            'name' => 'Teste',
+            'number' => 654,
+            'fund' => 0,
+            'user_id' => 1,
+        ]);
 
         \App\Models\Account::factory()->count(5)->create();
     }

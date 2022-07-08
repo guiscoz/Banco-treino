@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\Providers",
+    "\\app\\View",
+    "\\app\\View\\Components",
+    "\\database",
+    "\\database\\migrations",
+    "\\storage",
+    "\\storage\\app",
+    "\\storage\\app\\public"
+  ],
+  "PreviewInSolutionExplorer": false
+}
