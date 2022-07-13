@@ -24,10 +24,14 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        $name = ['required'];
+        $email = ['required', 'email:rfc'];
+        $password = ['required', 'confirmed'];
+
         return [
-            'name' => 'required',
-            'email' => 'required|email:rfc',
-            'password' => 'required|confirmed'
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
         ];
     }
 

@@ -24,10 +24,14 @@ class BankRequest extends FormRequest
      */
     public function rules()
     {
+        $bankName = ['required'];
+        $bankNumber = ['required', 'integer', 'digits:4'];
+        $bankFund = ['required', 'numeric', 'min:0'];
+
         return [
-            'bankName' => 'required',
-            'bankNumber' => 'required|integer|digits:4', 
-            'bankFund' => 'required|numeric|min:0',
+            'bankName' => $bankName,
+            'bankNumber' => $bankNumber, 
+            'bankFund' => $bankFund,
         ];
     }
 

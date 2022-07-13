@@ -24,9 +24,12 @@ class FileRequest extends FormRequest
      */
     public function rules()
     {
+        $txt = ['mimes:txt'];
+        $image = ['image', 'mimes:png'];
+
         return [
-            'txt' => 'mimes:txt',
-            'image' => 'image|mimes:png',
+            'txt' => $txt,
+            'image' => $image,
         ];
     }
 

@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\Account;
 use App\Models\User;
-use App\Http\Requests\BankRequest;
+use App\Http\Requests\FileRequest;
 
 class FileController extends Controller
 {
@@ -16,7 +16,7 @@ class FileController extends Controller
         return view('accounts.file', ['user' => $user]);
     }
 
-    public function upload(BankRequest $request) {
+    public function upload(FileRequest $request) {
         $user = auth()->user();
 
         if($request->txt != null) {

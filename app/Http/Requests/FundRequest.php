@@ -24,8 +24,10 @@ class FundRequest extends FormRequest
      */
     public function rules()
     {
+        $ammout = ['required', 'numeric', 'min:0'];
+
         return [
-            'ammount' => 'required|numeric|min:0',
+            'ammount' => $ammout,
         ];
     }
 

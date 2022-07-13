@@ -18,7 +18,6 @@ class Account extends Model
 
     protected $guarded = []; //tudo que é atualizado pelo POST pode ser guardado aqui
 
-    //chama o dono do evento
     public function user() {
         return $this->belongsTo('App\Models\User');
     }

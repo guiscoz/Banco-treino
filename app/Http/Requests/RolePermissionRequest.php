@@ -24,8 +24,10 @@ class RolePermissionRequest extends FormRequest
      */
     public function rules()
     {
+        $name = ['required'];
+
         return [
-            'name' => 'required',
+            'name' => $name,
         ];
     }
 

@@ -24,10 +24,15 @@ class UserEditRequest extends FormRequest
      */
     public function rules()
     {
+
+        $name = ['required'];
+        $email = ['required', 'email:rfc'];
+        $password = ['nullable'];
+
         return [
-            'name' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'nullable'
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
         ];
     }
 
