@@ -7,6 +7,7 @@ use \Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\Account;
 use App\Models\User;
+use App\Http\Requests\BankRequest;
 
 class FileController extends Controller
 {
@@ -15,21 +16,8 @@ class FileController extends Controller
         return view('accounts.file', ['user' => $user]);
     }
 
-    public function upload(Request $request) {
+    public function upload(BankRequest $request) {
         $user = auth()->user();
-
-        $validade = $request ->validate(
-            [
-                'txt' => 'mimes:txt',
-                'image' => 'image|mimes:png'
-            ],
-            [
-
-                'txt.mimes' => 'Formato errado!',
-                'image.image' => 'Precisa ser uma imagem',
-                'image.mimes' => 'Precisa ser um arquivo png',
-            ]
-        );
 
         if($request->txt != null) {
             $request->txt->storeAs('public/userFiles', 'userTxt'.$user->id.'.txt');

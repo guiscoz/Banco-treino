@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::put('/{user}/roles/sync', [UserController::class, 'rolesSync'])->name('user.rolesSync');
         Route::get('/create', [UserController::class, 'create'])->name('createUser');
         Route::post('/store', [UserController::class, 'store'])->name('storeUser');
+        Route::put('/show', [UserController::class, 'show'])->name('showUsers');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('editUser');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('updateUser'); 
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroyUser');

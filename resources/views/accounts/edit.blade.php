@@ -9,13 +9,21 @@
             @csrf
             @method('PUT')
             <label for="ammount">Qual é o novo valor do saldo?</label>
-            <input type="number" name="ammount" step="any" min="0">
+            <input type="number" name="ammount" step="any" min="0" >
             <select name="transaction">
                 <option value="1">Depositar</option>
                 <option value="2">Retirar</option>
             </select>
             <input type="submit" value="Confirmar">
         </form>
+
+        @if($errors)
+            @foreach($errors->all() as $error)
+                <div class="alert alert-danger mt-4" role="alert">
+                    {{ $error }}
+                </div>
+            @endforeach
+        @endif
     </div>
 
 @endsection

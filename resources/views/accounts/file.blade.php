@@ -21,6 +21,17 @@
             </button>
         </form>
 
+        @if($errors->any())
+            <br>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if (file_exists(public_path('storage/userFiles/userTxt'.$user->id.'.txt')))
             <div class="row mt-5">
                 <div class="col">
@@ -58,16 +69,6 @@
                 </div>
             </div>
         @endif
-    </div>
-    
-    @if($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif 
+    </div> 
 
 @endsection

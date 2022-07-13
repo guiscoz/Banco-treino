@@ -17,7 +17,7 @@
                     <div class="card">  
                         <div class="card-body">
                             <div class="card-title">{{ $account->name }} - {{ $account->number }}</div>
-                            <div class="card-date">Cadastrado neste site em: {{ $account->created_at != null ? $account->created_at->format('H:i - d/m/Y') : 'criado no Seeder'}}</div>
+                            <div class="card-date">Cadastrado neste site em: {{ $account->created_at != null ? $account->created_at->format('H:i - d/m/Y') : 'Criado no Seeder'}}</div>
                             <div class="card-date">Última atualização: {{ $account->updated_at != null ? $account->updated_at->format('H:i - d/m/Y') : 'criado no Seeder'}}</div>
                         </div>
                     </div>

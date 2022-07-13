@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\User;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserEditRequest;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 
@@ -15,15 +20,31 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public $usersPerPage;
+    
     public function index()
     {
         if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
             throw new UnauthorizedException('403', 'Você não tem permissão');
         }
-        $users = User::all();
+
+        $usersPerPage = request('usersPerPage');
+        $numberUsers = $usersPerPage ? $usersPerPage : 10;
+
+        $users = User::paginate($numberUsers);
+
+        $createdUsers = User::where('created_at', '2022-07-08 17:01:52')->paginate(10);
+        $toUsers = User::where('name', 'LIKE', 'To%')->paginate(10);
+        $specificUsers = User::where([['name', 'LIKE', '%a%'], ['created_at', '2022-07-08 17:01:52']])->orderBy('name', 'desc')->paginate(10);
+
         return view('users.index', [
-            'users' => $users
-        ]);;
+            'numberUsers' => $numberUsers,
+            'users' => $users,
+            'createdUsers' => $createdUsers,
+            'toUsers' => $toUsers,
+            'specificUsers' => $specificUsers,
+        ]);
     }
 
     /**
@@ -46,7 +67,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
             throw new UnauthorizedException('403', 'Você não tem permissão');
@@ -67,9 +88,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
+            throw new UnauthorizedException('403', 'Você não tem permissão');
+        }
+
+        $this->usersPerPage = filter_input(INPUT_POST, "usersPerPage", FILTER_SANITIZE_NUMBER_INT);
+
+        return view('users.index', ['users' => $users]);
     }
 
     /**
@@ -96,7 +123,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
         if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
             throw new UnauthorizedException('403', 'Você não tem permissão');

@@ -7,6 +7,8 @@ use \Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\Account;
 use App\Models\User;
+use App\Http\Requests\BankRequest;
+use App\Http\Requests\FundRequest;
 
 class BankController extends Controller
 {
@@ -14,12 +16,12 @@ class BankController extends Controller
         return view('accounts.create');
     }
 
-    public function store(Request $request) {
+    public function store(BankRequest $request) {
         $account = new Account;
 
-        $account->name = $request->name;
-        $account->number = $request->number;
-        $account->fund = $request->fund;
+        $account->name = $request->bankName;
+        $account->number = $request->bankNumber;
+        $account->fund = $request->bankFund;
         
         $user = auth()->user(); 
         $account->user_id = $user->id; 
@@ -30,7 +32,7 @@ class BankController extends Controller
             $account->save(); 
             return redirect()->route('index')->with('msg', 'Conta criada com sucesso!');  
         } else {
-            return redirect()->route('createAccount')->with('msg', 'Não é possível ter mais de uma conta no mesmo banco.');
+            return redirect()->route('createAccount')->with('alert', 'Não é possível ter mais de uma conta no mesmo banco.');
         } 
     }
 
@@ -45,13 +47,13 @@ class BankController extends Controller
         return view('accounts.edit', ['account' => $account]);
     }
 
-    public function update(Request $request, $id) {
-        $data = $request->all();
+    public function update(FundRequest $request, $id) {
+        //$data = $request->all();
 
         $currentFund= Account::findOrFail($id);
 
-        $dataAmmount = filter_input(INPUT_POST, "ammount", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $dataTransaction = filter_input(INPUT_POST, "transaction", FILTER_SANITIZE_NUMBER_INT);
+        $dataAmmount = filter_input(INPUT_POST, "ammount", FILTER_VALIDATE_FLOAT);
+        $dataTransaction = filter_input(INPUT_POST, "transaction", FILTER_VALIDATE_INT);
         if($dataTransaction  == 2) {
             $newFund = $currentFund->fund - $dataAmmount;
         } else {
@@ -68,7 +70,7 @@ class BankController extends Controller
             Account::findOrFail($request->id)->update($newData);
             return redirect('/dashboard')->with('msg', 'Saldo alterado com sucesso!');
         } else {
-            return redirect()->route('editAccount', [$id])->with('msg', 'Não foi possível retirar essa quantidade de dinheiro da sua conta.');
+            return redirect()->route('editAccount', [$id])->with('alert', 'Não foi possível retirar essa quantidade de dinheiro da sua conta.');
         }   
     }
 

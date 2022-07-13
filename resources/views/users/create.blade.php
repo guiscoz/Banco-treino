@@ -43,6 +43,12 @@
                                    name="password" value="{{ old('password') }}">
                         </div>
 
+                        <div class="form-group">
+                            <label for="name">Confirme a senha</label>
+                            <input type="password" class="form-control" id="password_confirmation" placeholder="Insira a senha novamente"
+                                   name="password_confirmation" value="{{ old('password') }}">
+                        </div>
+
                         <button type="submit" class="btn btn-block btn-success">Cadastrar Novo Usuário</button>
                     </form>
                 </div>
