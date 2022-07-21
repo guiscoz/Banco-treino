@@ -25,8 +25,7 @@
             @endforeach
         @endauth
         @guest
-            <div class="card">
-                {{-- <x-header /> --}}
+            <div class="card mt-3">
                 @component('components.header', [])
                 @endcomponent
                 <div class="card-body">
@@ -37,6 +36,53 @@
                 </div>
             </div>
         @endguest
+
+        
+        <div class="card mt-5 p-3">
+            <label for="cep">Digite um CEP: </label>
+            <input type="number" name="cep" id="cep" pattern="\d{5}-\d{3}" required>
+            <button onclick="show_cep()" class="btn btn-primary">Enviar CEP</button>
+        </div>
+
+        <div class="card mt-5 p-3">
+            <div class="card-title" id='cep-title'>CEP: </div>
+            <div class="card-date" id="logradouro">Logradouro: </div>
+            <div class="card-date" id="uf">UF: </div>
+            <div class="card-date" id="bairro">Bairro: </div>
+            <div class="card-date" id="localidade">Localidade: </div>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function show_cep() {
+            cep = document.getElementById('cep').value;
+
+            if(cep.length != 8) {
+                alert(`Não existe cep com ${cep.length} dígitos`);
+                return;
+            }
+
+            axios.get("http://viacep.com.br/ws/"+cep+"/json/", {})
+            .then(response => {
+                console.log(response.data);
+
+                if(response.data.erro) {
+                    alert('CEP inválido!');
+                    return;
+                }
+
+                document.getElementById('cep-title').innerText = `CEP: ${response.data.cep ? response.data.cep : 'Não definido'}`;
+                document.getElementById('logradouro').innerText = `Logradouro: ${response.data.logradouro ? response.data.logradouro : 'Não definido'}`;
+                document.getElementById('uf').innerText = `UF: ${response.data.uf ? response.data.uf : 'Não definido'}`;
+                document.getElementById('bairro').innerText = `Bairro: ${response.data.bairro ? response.data.bairro : 'Não definido'}`;
+                document.getElementById('localidade').innerText = `Localidade: ${response.data.localidade ? response.data.localidade : 'Não definido'}`;
+            }).catch(
+                erro => {
+                    console.log(erro);
+                }
+            );
+      }
+    </script>
 
 @endsection

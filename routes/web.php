@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('', [UserController::class, 'index'])->name('users');
+        Route::post('', [UserController::class, 'index'])->name('users');
         Route::get('/{user}/roles', [UserController::class, 'roles'])->name('user.roles');
         Route::put('/{user}/roles/sync', [UserController::class, 'rolesSync'])->name('user.rolesSync');
         Route::get('/create', [UserController::class, 'create'])->name('createUser');

@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Providers",
-    "\\app\\View",
-    "\\app\\View\\Components",
-    "\\database",
-    "\\database\\migrations",
-    "\\storage",
-    "\\storage\\app",
-    "\\storage\\app\\public"
+    "\\app\\Http",
+    "\\app\\Http\\Requests",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\permissions",
+    "\\resources\\views\\roles",
+    "\\resources\\views\\users",
+    "\\routes"
   ],
+  "SelectedNode": "\\app\\Http\\Requests\\RolePermissionRequest.php",
   "PreviewInSolutionExplorer": false
 }

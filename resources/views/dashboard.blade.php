@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="col-md-10 offset-md-1 dashboard-events-container">
+<div class="col-md-10 offset-md-1">
     @if(count($accounts) > 0)
         @component('components.dashboardComponent', [
             'accounts' => $accounts,

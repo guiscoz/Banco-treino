@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserEditRequest;
+use App\Http\Requests\LimitRequest;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Exceptions\UnauthorizedException;

@@ -6,7 +6,16 @@
 <div class="container">
     <a class="text-success" href="{{ route('createUser') }}">+ Cadastrar Usuário</a>
 
-    <form action="{{route('users')}}" method="get" class="mt-5">
+    @if($errors)
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger mt-4" role="alert">
+                {{ $error }}
+            </div>
+        @endforeach
+    @endif
+
+    <form action="{{route('users')}}" method="post" class="mt-5">
+        @csrf
         <label for="usersPerPage">Exibir quanto usuários por página: </label>
         <input type="number" min="1" max="1000" value="{{$numberUsers}}" step="1" name="usersPerPage" id="usersPerPage">
         <input type="submit" value="Atualizar">
