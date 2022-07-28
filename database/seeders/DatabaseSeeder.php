@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // UserSeeder::class,
             // AccountSeeder::class,
-            UsersTableSeeder::class,
+            // UsersTableSeeder::class,
             
-            // RolesTableSeeder::class,
-            // PermissionsTableSeeder::class,
-            // RolesUsersTableSeeder::class,
+            RolesTableSeeder::class,
+            PermissionsTableSeeder::class,
+            RolesUsersTableSeeder::class,
         ]);
     }
 }
