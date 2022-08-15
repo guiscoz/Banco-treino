@@ -25,7 +25,7 @@ class FileController extends Controller
         if($request->image != null){
             $request->image->storeAs('public/userFiles', 'userImage'.$user->id.'.png');
         }
-        
+
         return redirect('/accounts/file')->with('msg', 'Arquivo(s) enviado(s) com sucesso!');
     }
 

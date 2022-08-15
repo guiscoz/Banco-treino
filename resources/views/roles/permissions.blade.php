@@ -33,7 +33,7 @@
                             </div>
                         @endforeach
 
-                        <button type="submit" class="btn btn-block btn-success mt-4">Sincronizar Usuário</button>
+                        <button type="submit" class="btn btn-block btn-success mt-4">Sincronizar Perfil</button>
                     </form>
                 </div>
 
