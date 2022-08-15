@@ -3,5 +3,6 @@
     "/js/app.js": "/js/app.js",
     "/js/bootstrap.min.js": "/js/bootstrap.min.js",
     "/css/bootstrap.min.css": "/css/bootstrap.min.css",
-    "/css/fontawesome.min.css": "/css/fontawesome.min.css"
+    "/css/fontawesome.min.css": "/css/fontawesome.min.css",
+    "/bancoLogo.png": "/bancoLogo.png"
 }

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Criar conta')
-    
+
 @section('content')
 
 <div class="container">

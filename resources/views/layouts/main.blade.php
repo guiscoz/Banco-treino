@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-        
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
@@ -13,11 +13,11 @@
     </head>
 
     <body class="antialiased p-3">
-        <header>
+        <header class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="collapse navbar-collapse" id="navbar">
                     <a href="{{ route('index') }}" class="navbar-brand">
-                        <img src="{{asset('storage/bancoLogo.png')}}" alt="Banco Treino" style="height: 40px;">
+                        <img src="{{asset('bancoLogo.png')}}" alt="Banco Treino" style="height: 40px;">
                     </a>
                     <ul class="navbar-nav">
                         @auth
@@ -51,7 +51,7 @@
                             <li class="nav-item">
                                 <form action="/logout" method="POST">
                                     @csrf
-                                    <a href="/logout" 
+                                    <a href="/logout"
                                         class="nav-link"
                                         onclick="event.preventDefault();
                                             this.closest('form').submit();"
@@ -73,7 +73,7 @@
                 </div>
             </nav>
         </header>
-        
+
         <main>
             <div class="container-fluid">
                 <div class="row">
@@ -83,12 +83,12 @@
                     @if(session('alert'))
                         <p class="msg-alert">{{ session('alert') }}</p>
                     @endif
-                    @yield('content')   
+                    @yield('content')
                 </div>
             </div>
         </main>
 
-        <footer>
+        <footer class="container-fluid">
             <p>Banco Treino</p>
         </footer>
 
