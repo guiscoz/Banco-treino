@@ -1,12 +1,11 @@
 @extends('layouts.main')
 
 @section('title', 'Banco teste')
-    
+
 @section('content')
 
     <div class="container pb-5">
         @auth
-            {{-- <x-header username="{{ $user->name }}" /> --}}
             @component('components.header', [
                 'username' => $user->name
             ])
@@ -14,7 +13,7 @@
 
             @foreach($accounts as $account)
                 @if ($account->user_id == $user->id)
-                    <div class="card">  
+                    <div class="card">
                         <div class="card-body">
                             <div class="card-title">{{ $account->name }} - {{ $account->number }}</div>
                             <div class="card-date">Cadastrado neste site em: {{ $account->created_at != null ? $account->created_at->format('H:i - d/m/Y') : 'Criado no Seeder'}}</div>
@@ -37,7 +36,6 @@
             </div>
         @endguest
 
-        
         <div class="card mt-5 p-3">
             <label for="cep">Digite um CEP: </label>
             <input type="number" name="cep" id="cep" pattern="\d{5}-\d{3}" oninput="GetCep(this.value)">
