@@ -23,7 +23,7 @@ class UserController extends Controller
      */
 
     public $usersPerPage;
-    
+
     public function index()
     {
         if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
@@ -137,7 +137,7 @@ class UserController extends Controller
         if(!empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
-        
+
         $user->save();
 
         return redirect()->route('users');
@@ -178,7 +178,7 @@ class UserController extends Controller
                 $role->can = false;
             }
         }
-        
+
         return view('users.roles', [
             'user' => $user,
             'roles' => $roles
@@ -190,7 +190,7 @@ class UserController extends Controller
         if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
             throw new UnauthorizedException('403', 'Você não tem permissão');
         }
-        
+
         $rolesRequest = $request->except(['_token', '_method']);
 
         foreach($rolesRequest as $key => $value) {
@@ -199,7 +199,7 @@ class UserController extends Controller
 
         $user = User::where('id', $user)->first();
         if(!empty($roles)){
-            $user->syncRoles($roles); 
+            $user->syncRoles($roles);
         } else {
             $user->syncRoles(null);
         }

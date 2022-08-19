@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AccountDisplayController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -57,5 +58,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('editPermission');
         Route::put('/update/{id}', [PermissionController::class, 'update'])->name('updatePermission');
         Route::delete('/delete/{id}', [PermissionController::class, 'destroy'])->name('destroyPermission');
+    });
+
+    Route::name('user_accounts.')->group(function () {
+        //Route::get('user_accounts', [AccountDisplayController::class, 'index'])->name('index');
+        //Route::get('bank_list/{userId}', [AccountDisplayController::class, 'bank_list'])->name('bank_list');
+        //Route::get('user_account/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
+        Route::get('user_accounts', [AccountDisplayController::class, 'index'])->name('index');
+        Route::get('user_accounts/bank_list/{userId}', [AccountDisplayController::class, 'bank_list'])->name('bank_list');
+        Route::get('user_accounts/user_account/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
+
+        //Procurar fazer declarações de rota claras, do que o cliente está acessando, igual fazemos no projeto da Lhasa, senão realmente fica confuso.
     });
 });

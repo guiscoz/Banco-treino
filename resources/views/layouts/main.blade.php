@@ -35,6 +35,11 @@
                                     <a href="{{route('users')}}" class="nav-link">Gerenciar usuários</a>
                                 </li>
                             @endcan
+                            @can('Gerenciar usuários')
+                                <li class="nav-item">
+                                    <a href="{{route('user_accounts.index')}}" class="nav-link">Contas de usuários</a>
+                                </li>
+                            @endcan
                             @can('Gerenciar perfis')
                                 <li class="nav-item">
                                     <a href="{{route('roles')}}" class="nav-link">Gerenciar perfis</a>
@@ -92,7 +97,13 @@
             <p>Banco Treino</p>
         </footer>
 
+        {{-- <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+        </script> --}}
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
         <script src="{{asset('js/ionicons.esm.js')}}"></script>
         <script src="{{asset('js/ionicons.js')}}"></script>
     </body>

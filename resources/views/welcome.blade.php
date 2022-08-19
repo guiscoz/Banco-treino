@@ -29,7 +29,7 @@
                 @endcomponent
                 <div class="card-body">
                     <div class="card-title">...</div>
-                    <div class="card-date">Para ver suas contas neste site, é necessário fazer 
+                    <div class="card-date">Para ver suas contas neste site, é necessário fazer
                         <a href="login">login</a> ou <a href="register">cadastro</a>.
                     </div>
                 </div>

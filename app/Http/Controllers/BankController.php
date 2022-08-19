@@ -22,18 +22,18 @@ class BankController extends Controller
         $account->name = $request->bankName;
         $account->number = $request->bankNumber;
         $account->fund = $request->bankFund;
-        
-        $user = auth()->user(); 
-        $account->user_id = $user->id; 
+
+        $user = auth()->user();
+        $account->user_id = $user->id;
 
         $repeated = Account::where([['name', '=', $account->name]])->first();
 
         if($repeated == null) {
-            $account->save(); 
-            return redirect()->route('index')->with('msg', 'Conta criada com sucesso!');  
+            $account->save();
+            return redirect()->route('index')->with('msg', 'Conta criada com sucesso!');
         } else {
             return redirect()->route('createAccount')->with('alert', 'Não é possível ter mais de uma conta no mesmo banco.');
-        } 
+        }
     }
 
     public function edit($id) {
@@ -66,12 +66,12 @@ class BankController extends Controller
             $newData = [
                 'fund' => $newFund,
             ];
-            
+
             Account::findOrFail($request->id)->update($newData);
             return redirect('/dashboard')->with('msg', 'Saldo alterado com sucesso!');
         } else {
             return redirect()->route('editAccount', [$id])->with('alert', 'Não foi possível retirar essa quantidade de dinheiro da sua conta.');
-        }   
+        }
     }
 
     public function destroy($id) {
