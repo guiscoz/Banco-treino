@@ -19,7 +19,7 @@ class AccountDisplayController extends Controller
 
         $users = User::select(['id', 'name'])->get();
 
-        return view('accounts_display.index', compact('users'));
+        return view('account_display.index', compact('users'));
     }
 
     public function bank_list($userId) {
