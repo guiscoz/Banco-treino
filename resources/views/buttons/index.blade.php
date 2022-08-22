@@ -14,12 +14,10 @@
 
                             <div class="col-lg-12 col-sm-12 text-center">
                                 @foreach ($users as $key => $user)
-                                    <a href="" onclick="show_banks('{{ $user->id }}')" class="col-lg-2 col-sm-3 btn btn-large btn-default bg-primary">
+                                    <button onclick="show_banks('{{ $user->id }}')" class="col-lg-2 col-sm-3 btn btn-large btn-default bg-primary">
                                         <p class="text-light">{{$user->name}}</p>
-                                    </a>
+                                    </button>
                                 @endforeach
-                                {{-- <input type="text" name="seila" id="seila" value="seila"> --}}
-                                <p id="seila">Sei la</p>
                             </div>
                         </div>
                     </div>
@@ -33,7 +31,7 @@
                     </div>
 
                     <div id="localizedAccounts" class="card mb-5" style="display:none">
-                        <div class="card-header">Contas</div>
+                        <div class="card-header">Conta</div>
                         <div class="card-body p-2">
                             <div id="listAccounts" class="col-lg-12 col-sm-12 text-center">
                             </div>
@@ -47,105 +45,82 @@
 @endsection
 
 
-<script>
-    window.onload = function() {
-        if (window.jQuery) {
-            alert("jQuery working");
-        } else {
-            alert("jQuery Doesn't Work");
-        }
-    }
-
-    var seila = $('#seila').text();
-    alert(seila);
-
+<script type="text/javascript">
     function show_banks(userId) {
-        $("#listAccounts").empty();
-        $("#localizedAccounts").animate({opacity: "show"}, "normal").css("display", "none");
+        var listAccounts = document.getElementById('listAccounts');
+        while(listAccounts.firstChild) {
+            listAccounts.removeChild(listAccounts.firstChild);
+        }
+
+        var localizedAccounts = document.getElementById('localizedAccounts');
+        localizedAccounts.style.display = "none";
+
         axios.get('user_accounts/bank_list/'+userId, {})
             .then(response => {
-                $("#listBanks").empty();
+                var listBanks = document.getElementById('listBanks');
+                while(listBanks.firstChild) {
+                    listBanks.removeChild(listBanks.firstChild);
+                }
+
                 popBanks = '';
                 if (response.data == '') {
-                    popBanks = 'Nenhum registro foi localizado.';
+                    popBanks = '<p>Nenhum registro foi localizado.</p>';
                 } else {
-                    $.each(response.data, function (key, item) {
-                        popBanks += '<a href="#" onclick="find_accounts('+key+')" class="col-lg-2 col-sm-6 btn btn-large btn-default">';
-                        popBanks += item;
-                        popBanks += '</a>';
+                    response.data.forEach(function(item){
+                        popBanks += '<button onclick="find_accounts('+item.id+')" class="col-lg-2 col-sm-3 btn btn-large btn-default bg-primary mr-2 text-light">';
+                        popBanks += item.name;
+                        popBanks += '</button>';
                     });
                 }
-                $("#listBanks").append(popBanks);
+                listBanks.insertAdjacentHTML('beforeend', popBanks);
             })
         .catch(
             error => {
                 console.log(error);
             }
         );
-        $("#selectBank").animate({opacity: "show"}, "normal").css("display", "");
+
+        var selectBank = document.getElementById('selectBank');
+        selectBank.style.display = "";
     }
 
-    function find_accounts(userId) {
-        axios.get('../bank_list/'+userId, {})
+    function find_accounts(bankId) {
+        axios.get('user_accounts/bank_list/bank/'+bankId, {})
             .then(response => {
-                $("#listAccounts").empty();
+                var listAccounts = document.getElementById('listAccounts');
+                while(listAccounts.firstChild) {
+                    listAccounts.removeChild(listAccounts.firstChild);
+                }
+
                 popAccounts = '';
                 if (response.data == '') {
-                    $("#listAccounts").empty();
-                    popAccounts = 'Nenhum registro foi localizado.';
+                    popAccounts = '<p>Nenhum registro foi localizado.</p>';
                 } else {
-                    $.each(response.data, function (key, item) {
-                        console.log(key);
-                        popAccounts += '<a href="#" onclick="account_details('+key+')" class="col-lg-3 col-sm-6 btn btn-large btn-default">';
-                        popAccounts += item;
-                        popAccounts += '</a>';
-                    });
+                    accountFund = response.data.fund.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+                    popAccounts = '<table class="table table-striped table-hover table-sm">';
+                    popAccounts += '<tr>';
+                    popAccounts += '<td><strong>Número da conta</strong></td>';
+                    popAccounts += '<td><strong>Banco</strong></td>';
+                    popAccounts += '<td><strong>Saldo</strong></td>';
+                    popAccounts += '</tr>';
+                    popAccounts += '<tr>';
+                    popAccounts += '<td>'+response.data.number+'</td>';
+                    popAccounts += '<td>'+response.data.name+'</td>';
+                    popAccounts += '<td>'+accountFund+'</td>';
+                    popAccounts += '</tr>';
+                    popAccounts += '</table>';
                 }
-                $("#listAccounts").append(popAccounts);
+                listAccounts.insertAdjacentHTML('beforeend', popAccounts);
             })
         .catch(
             error => {
                 console.log(error);
             }
         );
-        $("#localizedAccounts").animate({opacity: "show"}, "normal").css("display", "");
+
+        var localizedAccounts = document.getElementById('localizedAccounts');
+        localizedAccounts.style.display = "";
     }
 
-    function account_details(bankId) {
-        axios.get('../user_account/'+bankId, {})
-            .then(response => {
-                var innerHtml = '<table class="table table-striped table-hover table-sm">';
-                innerHtml += '<tr>';
-                innerHtml += '<td><strong>Número da conta</strong></td>';
-                innerHtml += '<td><strong>Banco</strong></td>';
-                innerHtml += '<td><strong>Saldo</strong></td>';
-                innerHtml += '</tr>';
-                $.each(response.data, function (key, item) {
-                    innerHtml += '<tr>';
-                    innerHtml += '<td>';
-                    innerHtml += item['number']+'x';
-                    innerHtml += '</td>';
-                    innerHtml += '<td>';
-                    innerHtml += item['namen']+'%';
-                    innerHtml += '</td>';
-                    innerHtml += '<td>';
-                    innerHtml += item['fund'];
-                    innerHtml += '</td>';
-                    innerHtml += '</tr>';
-                });
-                innerHtml += '</table>';
-                Swal.fire({
-                    title: 'Contas',
-                    html: innerHtml,
-                    width: 800,
-                    showCloseButton: true,
-                    confirmButtonText: 'Fechar'
-                });
-            })
-        .catch(
-            error => {
-                console.log(error);
-            }
-        );
-    }
 </script>

@@ -39,7 +39,6 @@ class AccountDisplayController extends Controller
         }
 
         $account = Account::where('id', $bankId)->first();
-        dd($account);
 
         return response()->json($account);
     }

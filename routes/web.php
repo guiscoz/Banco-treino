@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function(){
         //Route::get('user_account/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
         Route::get('user_accounts', [AccountDisplayController::class, 'index'])->name('index');
         Route::get('user_accounts/bank_list/{userId}', [AccountDisplayController::class, 'bank_list'])->name('bank_list');
-        Route::get('user_accounts/user_account/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
+        Route::get('user_accounts/bank_list/bank/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
 
         //Procurar fazer declarações de rota claras, do que o cliente está acessando, igual fazemos no projeto da Lhasa, senão realmente fica confuso.
     });

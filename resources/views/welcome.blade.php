@@ -50,7 +50,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function GetCep(cep) {
             cep = document.getElementById('cep').value;
