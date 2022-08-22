@@ -35,7 +35,7 @@
                 <td>{{$user->id}} </td>
                 <td>{{$user->name}} </td>
                 <td>{{$user->email}} </td>
-                <td>{{$user->created_at != null ? $user->created_at : 'Criado no Seeder' }} </td>
+                <td>{{$user->created_at != null ? date_format($user->created_at, "s:i:H - d/m/Y") : 'Criado no Seeder' }} </td>
                 <td class="d-flex">
                     <a class="mr-3 btn btn-sm btn-outline-success" href="/user/edit/{{$user->id}}">Editar</a>
                     <a class="mr-3 btn btn-sm btn-outline-info" href="/user/{{$user->id}}/roles">Perfis</a>

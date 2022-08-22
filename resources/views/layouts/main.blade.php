@@ -24,9 +24,6 @@
                                 <a href="{{ route('dashboard') }}" class="nav-link">Minhas contas</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('createAccount') }}" class="nav-link">Cadastrar contas</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{route('file')}}" class="nav-link">Arquivos</a>
                             </li>
                             @can('Gerenciar usuários')

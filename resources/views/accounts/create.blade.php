@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Criar conta')
-    
+
 @section('content')
 
     <div class="container">
@@ -10,7 +10,7 @@
             @csrf
             <div class="pb-4">
                 <label for="bankName">Qual é o nome do banco?</label>
-                <input type="text" name="bankName">   
+                <input type="text" name="bankName">
             </div>
             <div class="pb-4">
                 <label for="bankNumber" p>Qual é o número do banco?</label>

@@ -10,6 +10,8 @@
 
 
 <div class="col-md-10 offset-md-1">
+    <a class="text-success" href="{{ route('createAccount') }}"> + Cadastrar nova conta</a>
+
     @if(count($accounts) > 0)
         @component('components.dashboardComponent', [
             'accounts' => $accounts,

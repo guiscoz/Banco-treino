@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(){
 
         $accounts = Account::all();
-        $user = auth()->user(); 
+        $user = auth()->user();
 
         return view('welcome', ['accounts' => $accounts, 'user' => $user]);
     }

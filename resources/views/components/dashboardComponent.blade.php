@@ -13,11 +13,11 @@
                 <td scope="row">{{$loop->index+1}}</td>
                 <td>{{ $account->name }}</a></td>
                 <td>{{ $account->number }}</td>
-                <td>R$ {{ number_format($account->fund, 2) }}</td>
+                <td>R$ {{ number_format($account->fund, 2, ',', '.') }}</td>
                 <td class="d-flex">
                     <a href="/accounts/edit/{{ $account->id }}" class="btn btn-info edit-btn">
-                        <i class="fa-solid fa-file-pen"></i></i>Editar
-                    </a> 
+                        <i class="fa-solid fa-file-pen"></i>Editar
+                    </a>
                     <form action="/accounts/{{ $account->id }}" method="POST">
                         @csrf
                         @method('DELETE')
