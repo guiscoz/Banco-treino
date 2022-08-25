@@ -50,8 +50,18 @@
         </div>
 
         <div class="card mt-5 p-3">
-            <button onClick="ShowGeolocation()">Saiba a latitute e longitude de seu local</button>
-            <div id="output"></div>
+            <div class="card-title">Geolocalização do usuário</div>
+            <div class="row">
+                <div class="col-4">
+                    <button onClick="ShowGeolocation()">Saiba a latitute e longitude de seu local</button>
+                </div>
+                <div class="col-4" id="latitude">
+                    <p>Latitude: </p>
+                </div>
+                <div class="col-4" id="longitude">
+                    <p>Longitude: </p>
+                </div>
+            </div>
         </div>
     </div>
 
