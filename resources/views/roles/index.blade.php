@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Gerenciando perfis')
-    
+
 @section('content')
 <div class="container">
     <a class="text-success" href="{{ route('createRole') }}">+ Cadastrar Perfil</a>

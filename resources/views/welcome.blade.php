@@ -48,6 +48,11 @@
             <div class="card-date" id="bairro">Bairro: </div>
             <div class="card-date" id="logradouro">Logradouro: </div>
         </div>
+
+        <div class="card mt-5 p-3">
+            <button onClick="ShowGeolocation()">Saiba a latitute e longitude de seu local</button>
+            <div id="output"></div>
+        </div>
     </div>
 
     <script>
@@ -82,7 +87,19 @@
                     console.log(erro);
                 }
             );
-      }
+        }
+
+        function ShowGeolocation() {
+            const sucessCallback = (position) => {
+                console.log(position);
+            };
+
+            const errorCallback = (error) => {
+                console.log(error);
+            };
+
+            navigator.geolocation.getCurrentPosition(sucessCallback, errorCallback);
+        }
     </script>
 
 @endsection
