@@ -26,6 +26,9 @@
                             <li class="nav-item">
                                 <a href="{{route('file')}}" class="nav-link">Arquivos</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('locations.index') }}" class="nav-link">Minha localização</a>
+                            </li>
                             @can('Gerenciar usuários')
                                 <li class="nav-item">
                                     <a href="{{route('users')}}" class="nav-link">Gerenciar usuários</a>

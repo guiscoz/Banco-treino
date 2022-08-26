@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountDisplayController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -64,5 +65,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('user_accounts', [AccountDisplayController::class, 'index'])->name('index');
         Route::get('user_accounts/bank_list/{userId}', [AccountDisplayController::class, 'bank_list'])->name('bank_list');
         Route::get('user_accounts/bank_list/bank/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
+    });
+
+    Route::name('locations.')->group(function () {
+        Route::get('locations', [LocationController::class, 'index'])->name('index');
+        Route::get('locations/store', [LocationController::class, 'store'])->name('store');
+        Route::get('locations/update/{id}', [LocationController::class, 'update'])->name('update');
     });
 });
