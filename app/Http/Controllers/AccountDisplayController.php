@@ -41,4 +41,14 @@ class AccountDisplayController extends Controller
 
         return response()->json($account);
     }
+
+    public function delete($bankId) {
+        if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
+            throw new UnauthorizedException('403', 'Você não tem permissão');
+        }
+
+        Account::findOrFail($bankId)->delete();
+
+        return redirect('/user_accounts')->with('msg', 'Conta excluída com sucesso!');
+    }
 }

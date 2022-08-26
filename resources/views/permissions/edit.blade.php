@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Editando a permissão: ' . $permission->name)
-    
+
 @section('content')
 
     <div class="container">
@@ -25,13 +25,11 @@
                         <form action="/permission/update/{{$permission->id}}" method="post" class="mt-4" autocomplete="off">
                             @csrf
                             @method('PUT')
-
                             <div class="form-group">
                                 <label for="name">Nome da Permissão</label>
                                 <input type="text" class="form-control" id="name" placeholder="Insira o nome da permissão"
                                     name="name" value="{{ old('name') ?? $permission->name }}">
                             </div>
-
                             <button type="submit" class="btn btn-block btn-success">Editar Permissão</button>
                         </form>
                     </div>

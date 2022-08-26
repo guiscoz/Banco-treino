@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Gerenciando usuários')
-    
+
 @section('content')
 <div class="container">
     <a class="text-success" href="{{ route('createUser') }}">+ Cadastrar Usuário</a>

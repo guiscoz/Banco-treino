@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Editando o perfil: ' . $role->name)
-    
+
 @section('content')
 
     <div class="container">

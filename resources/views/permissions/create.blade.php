@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Criar perfil')
-    
+
 @section('content')
 
 <div class="container">
@@ -24,13 +24,11 @@
 
                     <form action="{{ route('storePermission') }}" method="post" class="mt-4" autocomplete="off">
                         @csrf
-
                         <div class="form-group">
                             <label for="name">Nome da permissão</label>
                             <input type="text" class="form-control" id="name" placeholder="Insira o nome da permissão"
                                    name="name" value="{{ old('name') }}">
                         </div>
-
                         <button type="submit" class="btn btn-block btn-success">Cadastrar Nova Permissão</button>
                     </form>
                 </div>

@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('user_accounts', [AccountDisplayController::class, 'index'])->name('index');
         Route::get('user_accounts/bank_list/{userId}', [AccountDisplayController::class, 'bank_list'])->name('bank_list');
         Route::get('user_accounts/bank_list/bank/{bankId}', [AccountDisplayController::class, 'user_account'])->name('user_account');
+        Route::delete('user_accounts/bank_list/bank/delete/{bankId}', [AccountDisplayController::class, 'delete'])->name('delete');
     });
 
     Route::name('locations.')->group(function () {

@@ -17,20 +17,22 @@ class BankController extends Controller
     }
 
     public function store(BankRequest $request) {
-        $account = new Account;
-
-        $account->name = $request->bankName;
-        $account->number = $request->bankNumber;
-        $account->fund = $request->bankFund;
-
         $user = auth()->user();
-        $account->user_id = $user->id;
 
-        $repeated = Account::where([['name', '=', $account->name], ['user_id', '=', $user->id]])->first();
+        $newAccount = [
+            'name' => $request->bankName,
+            'number' => $request->bankNumber,
+            'fund' => $request->bankFund,
+            'user_id' => $user->id
+        ];
 
-        if($repeated == null) {
-            $account->save();
-            return redirect()->route('index')->with('msg', 'Conta criada com sucesso!');
+        $repeated = Account::where([['name', '=', $request->bankName], ['user_id', '=', $user->id]])->first();
+
+        if(empty($repeated)) {
+            if (Account::create($newAccount)) {
+                $request->session()->flash('msg', 'Gravação feita com sucesso!');
+            }
+            return redirect()->route('dashboard');
         } else {
             return redirect()->route('createAccount')
                 ->with('alert', 'Não é possível ter mais de uma conta no mesmo banco.');
@@ -45,7 +47,7 @@ class BankController extends Controller
             return redirect('/dashboard');
         }
 
-        return view('accounts.edit', ['account' => $account]);
+        return view('accounts.edit', compact('account'));
     }
 
     public function update(FundRequest $request, $id) {

@@ -15,13 +15,13 @@ class HomeController extends Controller
         $accounts = Account::all();
         $user = auth()->user();
 
-        return view('welcome', ['accounts' => $accounts, 'user' => $user]);
+        return view('welcome', compact('accounts', 'user'));
     }
 
     public function dashboard() {
         $user = auth()->user();
         $accounts = $user->accounts;
 
-        return view ('dashboard', ['accounts' => $accounts]);
+        return view ('dashboard', compact('accounts'));
     }
 }

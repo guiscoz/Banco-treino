@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Criar perfil')
-    
+
 @section('content')
 
 <div class="container">

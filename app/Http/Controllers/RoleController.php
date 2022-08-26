@@ -19,9 +19,7 @@ class RoleController extends Controller
 
         $roles = Role::all();
 
-        return view('roles.index', [
-            'roles' => $roles,
-        ]);
+        return view('roles.index', compact('roles'));
     }
 
     public function create()
@@ -100,10 +98,7 @@ class RoleController extends Controller
             }
         }
 
-        return view('roles.permissions', [
-            'role' => $role,
-            'permissions' => $permissions
-        ]);
+        return view('roles.permissions', compact('role', 'permissions'));
     }
 
     public function permissionsSync(Request $request, $role)

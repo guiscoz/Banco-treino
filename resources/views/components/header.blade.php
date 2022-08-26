@@ -1,4 +1,4 @@
-<div>   
+<div>
     @if(empty($username))
         <h1 class="mb-3">Bem-vindo ao nosso site</h1>
     @else

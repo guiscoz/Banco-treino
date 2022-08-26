@@ -109,7 +109,7 @@
                     popAccounts += '<td>'+response.data.number+'</td>';
                     popAccounts += '<td>'+response.data.name+'</td>';
                     popAccounts += '<td>'+accountFund+'</td>';
-                    popAccounts += '<td><form action=/accounts/'+response.data.id+' method="post">@csrf @method("DELETE")';
+                    popAccounts += '<td><form action=/user_accounts/bank_list/bank/delete/'+response.data.id+' method="post">@csrf @method("DELETE")';
                     popAccounts += '<button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                     popAccounts += '</td></form>';
                     popAccounts += '</tr>';

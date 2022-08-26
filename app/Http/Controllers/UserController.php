@@ -36,13 +36,7 @@ class UserController extends Controller
             ->orderBy('name', 'desc')
             ->paginate(10);
 
-        return view('users.index', [
-            'numberUsers' => $numberUsers,
-            'users' => $users,
-            'createdUsers' => $createdUsers,
-            'toUsers' => $toUsers,
-            'specificUsers' => $specificUsers,
-        ]);
+        return view('users.index', compact('users', 'numberUsers', 'createdUsers', 'toUsers', 'specificUsers'));
     }
 
     public function create()
@@ -140,10 +134,7 @@ class UserController extends Controller
             }
         }
 
-        return view('users.roles', [
-            'user' => $user,
-            'roles' => $roles
-        ]);
+        return view('users.roles', compact('user', 'roles'));
     }
 
     public function rolesSync(Request $request, $user)
