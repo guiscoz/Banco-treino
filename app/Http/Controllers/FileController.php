@@ -19,11 +19,19 @@ class FileController extends Controller
     public function upload(FileRequest $request) {
         $user = auth()->user();
 
+        if (!file_exists(public_path('storage'))) {
+            mkdir(public_path('storage'));
+        }
+
+        if (!file_exists(public_path('storage/userFiles'))) {
+            mkdir(public_path('storage/userFiles'));
+        }
+
         if($request->txt != null) {
-            $request->txt->storeAs('public/userFiles', 'userTxt'.$user->id.'.txt');
+            $request->txt->move(public_path('storage/userFiles'), 'userTxt'.$user->id.'.txt');
         }
         if($request->image != null){
-            $request->image->storeAs('public/userFiles', 'userImage'.$user->id.'.png');
+            $request->image->move(public_path('storage/userFiles'), 'userImage'.$user->id.'.png');
         }
 
         return redirect('/accounts/file')->with('msg', 'Arquivo(s) enviado(s) com sucesso!');

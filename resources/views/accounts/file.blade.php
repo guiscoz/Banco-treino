@@ -32,7 +32,7 @@
             </div>
         @endif
 
-        @if (file_exists(public_path('userFiles/userTxt'.$user->id.'.txt')))
+        @if (file_exists(public_path('storage/userFiles/userTxt'.$user->id.'.txt')))
             <div class="row mt-5">
                 <div class="col">
                     <form action="{{route('download','userTxt'.$user->id.'.txt')}}" method="GET" enctype="multipart/form-data">
@@ -51,7 +51,7 @@
             </div>
         @endif
 
-        @if (file_exists(public_path('userFiles/userImage'.$user->id.'.png')))
+        @if (file_exists(public_path('storage/userFiles/userImage'.$user->id.'.png')))
             <div class="row my-5">
                 <div class="col">
                     <form action="{{route('download','userImage'.$user->id.'.png')}}" method="GET" enctype="multipart/form-data">
