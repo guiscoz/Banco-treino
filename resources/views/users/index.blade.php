@@ -16,8 +16,8 @@
 
     <form action="{{route('users')}}" method="post" class="mt-5">
         @csrf
-        <label for="usersPerPage">Exibir quanto usuários por página: </label>
-        <input type="number" min="1" max="1000" value="{{$numberUsers}}" step="1" name="usersPerPage" id="usersPerPage">
+        <label for="pagination">Exibir quanto usuários por página: </label>
+        <input type="number" min="1" max="1000" value="{{$pagination}}" step="1" name="pagination" id="pagination">
         <input type="submit" value="Atualizar">
     </form>
 

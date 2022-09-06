@@ -18,17 +18,21 @@ class UserController extends Controller
 {
     public $usersPerPage;
 
-    public function index()
+    public function index(Request $request)
     {
         if(!Auth::user()->hasPermissionTo('Gerenciar usuários') && !Auth::user()->hasRole('Super Admin')){
             throw new UnauthorizedException('403', 'Você não tem permissão');
         }
 
-        $usersPerPage = request('usersPerPage');
-        $numberUsers = $usersPerPage ? $usersPerPage : 10;
+        $pagination = 10;
 
-        $users = User::paginate($numberUsers);
+        if ($request->isMethod('post')) {
+            if (!empty($request->pagination)) {
+                $pagination = $request->pagination;
+            }
+        }
 
+        $users = User::paginate($pagination);
         $createdUsers = User::where('created_at', '2022-07-08 17:01:52')->paginate(10);
         $toUsers = User::where('name', 'LIKE', 'To%')->paginate(10);
 
@@ -36,7 +40,7 @@ class UserController extends Controller
             ->orderBy('name', 'desc')
             ->paginate(10);
 
-        return view('users.index', compact('users', 'numberUsers', 'createdUsers', 'toUsers', 'specificUsers'));
+        return view('users.index', compact('users', 'pagination', 'createdUsers', 'toUsers', 'specificUsers'));
     }
 
     public function create()
