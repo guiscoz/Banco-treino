@@ -48,6 +48,14 @@
             <div class="card-date" id="bairro">Bairro: </div>
             <div class="card-date" id="logradouro">Logradouro: </div>
         </div>
+
+        <div class="card mt-5 p-3">
+            <div class="card-date d-flex">
+                <p>Escolha uma biblioteca javascript para replicação de campos:</p>
+                <a href="react" class="mx-3">React.j</a>
+                <a href="vue">Vue.js</a>.
+            </div>
+        </div>
     </div>
 
     <script>

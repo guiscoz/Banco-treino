@@ -24,4 +24,12 @@ class HomeController extends Controller
 
         return view ('dashboard', compact('accounts'));
     }
+
+    public function vue() {
+        return view ('replication.vue');
+    }
+
+    public function react() {
+        return view ('replication.react');
+    }
 }
