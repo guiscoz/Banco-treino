@@ -9,6 +9,13 @@
                 <div class="card-title"><h1>Replicação com React.js</h1></div>
             </div>
 
+            <div id="replicas"></div>
+            <script type="text/babel">
+                const titulo = '<h2>React Replica</h2>';
+                console.log(titulo);
+                ReactDOM.render(titulo, document.getElementById('replicas'));
+            </script>
+
             <div class="card mt-5 p-3">
                 <div class="card-date d-flex">
                     <a href="vue" class="mr-3">Replicação com Vue.js</a>

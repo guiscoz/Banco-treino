@@ -22,52 +22,11 @@
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
 <script>
-    new Vue({
-        el: '#replicas',
-        template: `
-            <h1>Comentários</h1>
-            <hr />
-            <div class="form-todo form-group">
-                <p>
-                <input placeholder="nome" type="text" name="author" class="form-control" v-model="name" />
-                </p>
-                <p>
-                <textarea placeholder="Comentário" name="message"  class="form-control" v-model="message"></textarea>
-                </p>
-                <button v-on:click="addComment" type="submit" class="btn btn-primary">Comentar</button>
-            </div>
-            <div class="list-group">
-                <div class="list-group-item" v-for="(comment, index) in allComments">
-                <span class="comment__author">Autor: <strong>Replica</strong></span>
-                <p>Replica</p>
-                <div>
-                    <a href="#" title="Excluir" v-on:click.prevent="removeComment(index)">Excluir</a>
-                </div>
-                </div>
-            </div>
-            <hr />
-        `,
-        data() {
-            return {
-            comments: [],
-            name: '',
-            message: ''
-            }
-        },
-        methods: {
-            addComment() {
-                this.comments.push({
-                    name: this.name,
-                    message: this.message
-                });
-
-                this.name = '';
-                this.message = '';
-            },
-            removeComment(index) {
-                this.comments.splice(index, 1);
-            }
-        }
-    })
+    const app = Vue.createApp({
+        template: '<h2>Vue Replica</h2>'
+    });
+    console.log(app);
+    app.mount("#replicas");
 </script>

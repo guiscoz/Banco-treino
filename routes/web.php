@@ -11,11 +11,11 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/react', [HomeController::class, 'react'])->name('react');
+Route::get('/vue', [HomeController::class, 'vue'])->name('vue');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/react', [HomeController::class, 'react'])->name('react');
-    Route::get('/vue', [HomeController::class, 'vue'])->name('vue');
 
     Route::group(['prefix' => 'accounts'], function () {
         Route::get('create', [BankController::class, 'create'])->name('createAccount');
