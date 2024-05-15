@@ -46,7 +46,7 @@ ADMIN_PASSWORD vai receber sua senha
 Os demais campos do '.env' você altera se quiser.
 
 
-# Comandos do terminal
+## Comandos do terminal
 
 Primeiramente é preciso instalar o pacote do composer e do npm, já que seus arquivos não vem junto com o repositório e podem estar sempre precisando de atualizações. Para instalar os pacotes, basta executar estes comandos:
 
