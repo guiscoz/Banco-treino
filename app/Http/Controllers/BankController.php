@@ -53,12 +53,10 @@ class BankController extends Controller
     public function update(FundRequest $request, $id) {
         $currentFund= Account::findOrFail($id);
 
-        $dataAmmount = filter_input(INPUT_POST, "ammount", FILTER_VALIDATE_FLOAT);
-        $dataTransaction = filter_input(INPUT_POST, "transaction", FILTER_VALIDATE_INT);
-        if($dataTransaction  == 2) {
-            $newFund = $currentFund->fund - $dataAmmount;
+        if($request->transaction  == 2) {
+            $newFund = $currentFund->fund - $request->ammount;
         } else {
-            $newFund = $currentFund->fund + $dataAmmount;
+            $newFund = $currentFund->fund + $request->ammount;
         }
 
         if($newFund >= 0){

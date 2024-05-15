@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Movimentar dinheiro do ' . $account->name)
-    
+
 @section('content')
     <div class="container">
         <h1>O seu saldo atual do {{ $account->name }} é de R${{ number_format($account->fund, 2) }}</h1>
@@ -12,7 +12,7 @@
             <input type="number" name="ammount" step="any" min="0" >
             <select name="transaction">
                 <option value="1">Depositar</option>
-                <option value="2">Retirar</option>
+                <option value="2">Sacar</option>
             </select>
             <input type="submit" value="Confirmar">
         </form>

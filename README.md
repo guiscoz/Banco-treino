@@ -1,64 +1,74 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Projeto
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Banco Treino é o meu primeiro projeto criado no Laravel. Esta é uma plataforma que permite o usuário gerenciar suas contas bancárias e realizar as seguintes:
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Cadastrar suas contas bancárias
+- Realizar saque ou depósito
+- Apagar suas contas bancárias
+- Fazer upload de um arquivo txt ou png
+- Gravar sua localização
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Além disso, há um sistema de permissões gerado pelo Spatie que permite somente usuários de um perfil específico à realizar determinadas ações. Ao executar o projeto na sua máquina, será gerado um Super Admin cujos os dados serão definidos nas variáveis de ambiente. Este usuário vai ter todas as permissões, inclusive quais perfis cada usuário vai ter e qual permissão cada perfil vai ter.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Ao clonar o repositório
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Agora será dados as instruções do que deve ser feito para esta plataforma rodar na sua máquina após clonar o repositório
 
-## Laravel Sponsors
+## Instalações
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Será necessário ter instalar o php, MySQL, composer, apache e o ngnix. Você também pode instalar o Laragon que vai instalar o apache e o nginx para você e executará eles quando o Laragon for ativado.
 
-### Premium Partners
+## Variáveis de ambiente
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Agora deve criar o arquivo '.env' usando o '.env.example' como base para armazenar as variáveis de ambientes. Ambos os arquivos ficarão na mesma pasta. Pode todo o conteúdo do exemplo para o arquivo final, só será necessário alterar essas linhas:
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=SUA_SENHA_MYSQL
 
-## Code of Conduct
+ADMIN_EMAIL=EMAIL_DO_ADMINISTRADOR
+ADMIN_PASSWORD=SENHA_DO_ADMINISTRADOR
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+No DB_DATABASE vai ser inserido o nome do banco de dados do MySQL que será utilizado.
+DB_USERNAME é o seu nome de usuário do MySQL que por padrão é root, mas o seu caso pode ser diferente.
+DB_PASSWORD vai receber sua senha do MySQL. Caso não tiver uma, pode deixar vazio.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+ADMIN_EMAIL contém o email do Super Admin que terá todas as permissões e todos os perfis do sistema
+ADMIN_PASSWORD vai receber sua senha
+Os demais campos do '.env' você altera se quiser.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Comandos do terminal
+
+Primeiramente é preciso instalar o pacote do composer e do npm, já que seus arquivos não vem junto com o repositório e podem estar sempre precisando de atualizações. Para instalar os pacotes, basta executar estes comandos:
+
+```
+composer install
+npm install
+```
+
+
+Agora preciso gerar as tabelas de dados em seu banco. Aqui também será gerado o usuário Super Admin, para isso use o comando:
+```
+php artisan migrate
+```
+
+
+Depois disso será necessários gerar os dados dentro do arquivo de seeders, dentro dele está uma lista de perfis e permissões que será necessário para a plataforma. Basta user o comando:
+```
+php artisan db:seed
+```
+
+
+Talvez seja necessário uma chave de aplicação (Application Key). Para resolver o problema basta utilizar este comando no terminal:
+```
+php artisan key:generate
+```

@@ -8,11 +8,6 @@ use App\Models\User;
 
 class RolesUsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         User::find(1)->roles()->attach(1);
