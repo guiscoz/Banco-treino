@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Banco teste')
+@section('title', 'Banco treino')
 
 @section('content')
 
@@ -61,8 +61,6 @@
 
             axios.get("http://viacep.com.br/ws/"+cep+"/json/", {})
             .then(response => {
-                console.log(response.data);
-
                 if(response.data.erro) {
                     document.getElementById('cep-title').innerText = `CEP: ${notFound}`;
                     document.getElementById('logradouro').innerText = `Logradouro: ${notFound}`;

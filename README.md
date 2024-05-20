@@ -10,7 +10,8 @@ Banco Treino é o meu primeiro projeto criado no Laravel. Esta é uma plataforma
 - Gravar sua localização
 
 
-Além disso, há um sistema de permissões gerado pelo Spatie que permite somente usuários de um perfil específico à realizar determinadas ações. Ao executar o projeto na sua máquina, será gerado um Super Admin cujos os dados serão definidos nas variáveis de ambiente. Este usuário vai ter todas as permissões, inclusive quais perfis cada usuário vai ter e qual permissão cada perfil vai ter.
+Sua autenticação é realizada pelo pacote JetStream do Composer. Há um sistema de permissões gerado pelo Spatie que permite somente usuários de um perfil específico à realizar determinadas ações. Ao executar o projeto na sua máquina, será gerado um Super Admin cujos os dados serão definidos nas variáveis de ambiente. Este usuário vai ter todas as permissões, inclusive quais perfis cada usuário vai ter e qual permissão cada perfil vai ter.
+Na página inicial, qualquer usuário pode obter um endereço. Caso você estiver logado com a conta do Super Admin, será possível alterar dados de outros usuários.
 
 
 # Ao clonar o repositório
