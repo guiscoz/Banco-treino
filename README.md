@@ -73,3 +73,30 @@ Talvez seja necessário uma chave de aplicação (Application Key). Para resolve
 ```
 php artisan key:generate
 ```
+
+
+## Docker
+
+
+Caso você tenha apenas o Docker instalado na sua máquina, isso é o suficiente para executar o projeto. Basta executar os seguintes comandos no terminal:
+
+
+Construção de ambiente que irá gerar dois containers. Um para o laravel e outro do mysql.
+```
+docker-compose build
+```
+
+
+Subir os containers.
+```
+docker-compose up -d
+```
+
+
+Entrar no container da aplicação:
+```
+docker exec -it banco_treino-app bash
+```
+
+
+Depois disso você pode começar a usar os comandos do php e artisan mencionados neste arquivo anteriormente para executar o projeto.
