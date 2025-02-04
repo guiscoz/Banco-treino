@@ -65,3 +65,7 @@ Teve uma correção no arquivo README.md e uns ajustes na view de location e da 
 ## 22/01/2025
 
 Agora é possível executar o projeto usando o Docker e também foi gerado este arquivo de changelog para registrar cada atualização do projeto.
+
+## 04/02/2025
+
+O ambiente Docker passou a ser definido pelo recurso Sail do Laravel devido aos problemas de conexão do container de php com o do MySQL que haviam anteriormente.

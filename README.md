@@ -93,10 +93,9 @@ docker-compose up -d
 ```
 
 
-Entrar no container da aplicação:
+Em seguida você deve rodar as migrations e o seeder:
 ```
-docker exec -it banco_treino-app bash
+docker-compose exec banco-treino php artisan migrate --seed
 ```
 
-
-Depois disso você pode começar a usar os comandos do php e artisan mencionados neste arquivo anteriormente para executar o projeto.
+Graças ao uso do Sail deste framework, não há necessidade de um comando para a execução do projeto porque suas páginas já estarão disponíveis no localhost (http://localhost:8000/) assim que os containers forem ativados. Quando quiser rodar novamente com as migrations instaladas, pode usar somente o 'docker-composer up' sem o '-d' no final.
